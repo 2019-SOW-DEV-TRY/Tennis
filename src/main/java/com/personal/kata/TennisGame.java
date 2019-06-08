@@ -27,6 +27,10 @@ public class TennisGame {
     }
 
     public String getGameScore() {
+        return calculateGameScore();
+    }
+
+    private String calculateGameScore() {
         String player1GameScore = LOVE;
         if (isPlayerScoresEqual() && player1.getPlayerScore() == 0) {
             gameScore = LOVE + HYPHEN + SAME_GAME_SCORE;
