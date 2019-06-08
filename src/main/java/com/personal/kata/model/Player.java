@@ -2,7 +2,7 @@ package com.personal.kata.model;
 
 public class Player {
     private int playerScore;
-    private String playerName;
+    private final String playerName;
 
     public Player(String playerName) {
         this.playerName = playerName;
@@ -17,6 +17,6 @@ public class Player {
     }
 
     public void scorePoint() {
-        playerScore = 1;
+        playerScore++;
     }
 }
