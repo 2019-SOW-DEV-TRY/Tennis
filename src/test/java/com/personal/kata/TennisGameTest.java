@@ -162,6 +162,16 @@ public class TennisGameTest {
         assertConsoleLines("Please enter Player Two name: ", 2);
     }
 
+    @Test
+    @DisplayName("Given tennis application is launched When the prompt to enter Player two name is displayed and entered Then the entered player name is set as Player 2 name")
+    public void test_TennisApplicationLaunched_AfterPlayer2NamePrompt_ShouldAssignEntryToSecondPlayerName() {
+        inputLinesToConsole();
+
+        tennisGame = tennisGame.launchTennisGame(printStream);
+
+        assertEquals("Bob", tennisGame.getPlayer2().getPlayerName());
+    }
+
 
     private void scoreWinsByPlayer(Player player, int totalWins) {
         for (int ball = 1; ball <= totalWins; ball++) {
@@ -181,7 +191,8 @@ public class TennisGameTest {
     }
 
     private void inputLinesToConsole() {
-        String consoleInput = "Rob" + System.getProperty("line.separator");
+        String newLine = System.getProperty("line.separator");
+        String consoleInput = "Rob" + newLine + "Bob";
         System.setIn(new ByteArrayInputStream(consoleInput.getBytes()));
     }
 

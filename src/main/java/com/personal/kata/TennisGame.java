@@ -28,7 +28,7 @@ public class TennisGame {
 
     private TennisGame(String player1Name, String player2Name) {
         player1 = new Player(player1Name);
-        player2 = new Player("Player 2");
+        player2 = new Player(player2Name);
         gameScore = Score.LOVE.scoreCall + HYPHEN + SAME_GAME_SCORE;
     }
 
@@ -50,7 +50,8 @@ public class TennisGame {
         Scanner inputFromConsole = new Scanner(System.in);
         String player1Name = inputFromConsole.nextLine();
         out.println(PROMPT_FOR_PLAYER2_NAME);
-        return new TennisGame(player1Name, new String());
+        String player2Name = inputFromConsole.nextLine();
+        return new TennisGame(player1Name, player2Name);
     }
 
     private enum Score {
