@@ -69,6 +69,6 @@ public class TennisGame {
     }
 
     private boolean isDeuce() {
-        return isPlayerScoresEqual() && player1.getPlayerScore() == 3;
+        return isPlayerScoresEqual() && player1.getPlayerScore() >= Score.FORTY.score;
     }
 }

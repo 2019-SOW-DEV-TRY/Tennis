@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TennisGameTest {
 
     private static final String ALL = "-All";
+    private static final String DEUCE_GAME_SCORE = "Deuce";
     private TennisGame tennisGame;
 
     @BeforeEach
@@ -79,7 +80,16 @@ public class TennisGameTest {
         scoreWinsByPlayer(tennisGame.getPlayer1(), 3);
         scoreWinsByPlayer(tennisGame.getPlayer2(), 3);
 
-        assertEquals("Deuce", tennisGame.getGameScore());
+        assertEquals(DEUCE_GAME_SCORE, tennisGame.getGameScore());
+    }
+
+    @Test
+    @DisplayName("Given a tennis game started When Player 1 and Player 2 score atleast 3 points and each score same points Then the game score is Deuce")
+    public void test_GameInProgress_Player1AndPlayer2_ScoreAtLeast3Points_AndScoreSamePoints_ShouldHaveGameScoreDeuce() {
+        scoreWinsByPlayer(tennisGame.getPlayer1(), 5);
+        scoreWinsByPlayer(tennisGame.getPlayer2(), 5);
+
+        assertEquals(DEUCE_GAME_SCORE, tennisGame.getGameScore());
     }
 
 
