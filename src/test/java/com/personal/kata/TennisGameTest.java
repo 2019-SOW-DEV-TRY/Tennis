@@ -1,5 +1,6 @@
 package com.personal.kata;
 
+import com.personal.kata.model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,8 +19,7 @@ public class TennisGameTest {
     @Test
     @DisplayName("Given a tennis game When tennis game starts Then there should be two players with scores at zero each")
     public void test_NewGameState_ShouldHaveTwoPlayerScores_ScoresAtZero() {
-        assertEquals(0, tennisGame.getPlayer1().getPlayerScore());
-        assertEquals(0, tennisGame.getPlayer2().getPlayerScore());
+        assertPointsScoredByPlayers(0, 0);
     }
 
     @Test
@@ -33,21 +33,29 @@ public class TennisGameTest {
     @DisplayName("Given a tennis game started When Player1 scores a point Then the score of Player1 should increase by one point")
     public void test_GameInProgress_Player1Scores_ShouldIncreaseScoreOfPlayer1() {
 
-        tennisGame.getPlayer1().scorePoint();
+        scoreWinsByPlayer(tennisGame.getPlayer1(), 1);
 
-        assertEquals(1, tennisGame.getPlayer1().getPlayerScore());
-        assertEquals(0, tennisGame.getPlayer2().getPlayerScore());
+        assertPointsScoredByPlayers(1, 0);
     }
 
     @Test
     @DisplayName("Given a tennis game started When Player1 scores two points Then the score of Player1 should increase by two points")
     public void test_GameInProgress_Player1ScoresTwoPoints_ShouldIncreaseScoreOfPlayer1ByTwoPoints() {
 
-        tennisGame.getPlayer1().scorePoint();
-        tennisGame.getPlayer1().scorePoint();
+        scoreWinsByPlayer(tennisGame.getPlayer1(), 2);
 
-        assertEquals(2, tennisGame.getPlayer1().getPlayerScore());
-        assertEquals(0, tennisGame.getPlayer2().getPlayerScore());
+        assertPointsScoredByPlayers(2, 0);
+    }
+
+    private void scoreWinsByPlayer(Player player, int totalWins) {
+        for (int ball = 1; ball <= totalWins; ball++) {
+            player.scorePoint();
+        }
+    }
+
+    private void assertPointsScoredByPlayers(int player1Score, int player2Score) {
+        assertEquals(player1Score, tennisGame.getPlayer1().getPlayerScore());
+        assertEquals(player2Score, tennisGame.getPlayer2().getPlayerScore());
     }
 
 }
