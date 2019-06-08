@@ -132,6 +132,17 @@ public class TennisGameTest {
         assertEquals("Welcome! Lets Play Tennis", consoleLines[0]);
     }
 
+    @Test
+    @DisplayName("Given tennis application is available When the tennis application is launched Then after the welcome message it prompts to enter first player name ")
+    public void test_TennisApplicationIsLaunched_AfterWelcomeMessage_ShouldPromptForFirstPlayerName() {
+
+        tennisGame.launchTennisGame(printStream);
+
+        String console = new String(outputStream.toByteArray());
+        String[] consoleLines = console.split(System.getProperty("line.separator"));
+        assertEquals("Please enter Player One name: ", consoleLines[1]);
+    }
+
     private void scoreWinsByPlayer(Player player, int totalWins) {
         for (int ball = 1; ball <= totalWins; ball++) {
             player.scorePoint();

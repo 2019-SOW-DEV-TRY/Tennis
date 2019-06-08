@@ -37,6 +37,7 @@ public class TennisGame {
 
     public void launchTennisGame(PrintStream out) {
         out.println("Welcome! Lets Play Tennis");
+        out.println("Please enter Player One name: ");
     }
 
     private enum Score {
