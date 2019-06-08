@@ -47,6 +47,12 @@ public class TennisGameTest {
         assertPointsScoredByPlayers(2, 0);
     }
 
+    @Test
+    @DisplayName("Given a tennis game When tennis game starts Then the game score is Love-All")
+    public void test_NewGameState_ShouldHaveGameScore_LoveAll() {
+        assertEquals("Love-All", tennisGame.getGameScore());
+    }
+
     private void scoreWinsByPlayer(Player player, int totalWins) {
         for (int ball = 1; ball <= totalWins; ball++) {
             player.scorePoint();
