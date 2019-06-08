@@ -204,6 +204,18 @@ public class TennisGameTest {
         assertConsoleLines("Please enter a valid Input !!", 5);
     }
 
+    @Test
+    @DisplayName("Given tennis application is launched When the Playing instructions are displayed and C is pressed Then the game terminates with Game over message")
+    public void test_TennisApplicationLaunched_AfterPlayingInstructions_KeyToCancelIsPressed_ShouldTerminateGame() {
+        String newLine = System.getProperty("line.separator");
+        String consoleInput = "Rob" + newLine + "Bob" + newLine + "C";
+        inputThisLineToConsole(consoleInput);
+
+        tennisGame.launchTennisGame(printStream);
+
+        assertConsoleLines("Game Over !!", 5);
+    }
+
 
     private void scoreWinsByPlayer(Player player, int totalWins) {
         for (int ball = 1; ball <= totalWins; ball++) {

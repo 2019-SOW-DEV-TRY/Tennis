@@ -24,6 +24,7 @@ public class TennisGame {
     private static final String PLAYING_INSTRUCTIONS_PART2 = " / [" + PLAYER_2_INDICATOR + "]: ";
     private static final String PLAYING_INSTRUCTIONS_PART3 = " Or Press [" + GAME_CANCEL_INDICATOR + "] to stop playing";
     public static final String INVALID_INPUT_MESSAGE = "Please enter a valid Input !!";
+    public static final String GAME_OVER_MESSAGE = "Game Over !!";
 
     private Player player1;
     private Player player2;
@@ -63,9 +64,10 @@ public class TennisGame {
         out.println(GAME_STARTS_NOW_MESSAGE);
         TennisGame tennisAppGame = new TennisGame(player1Name, player2Name);
         out.println(PLAYING_INSTRUCTIONS_PART1 + player1Name + PLAYING_INSTRUCTIONS_PART2 + player2Name + PLAYING_INSTRUCTIONS_PART3);
-        if (!inputFromConsole.nextLine().matches("^(([1|2])|([c|C]))$")) {
-            out.println(INVALID_INPUT_MESSAGE);
+        if (inputFromConsole.nextLine().matches("^(([1|2])|([c|C]))$")) {
+            out.println(GAME_OVER_MESSAGE);
         }
+        out.println(INVALID_INPUT_MESSAGE);
         return tennisAppGame;
     }
 
