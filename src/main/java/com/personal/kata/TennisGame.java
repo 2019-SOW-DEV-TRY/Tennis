@@ -60,6 +60,8 @@ public class TennisGame {
             gameScore = getScoreCall(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
         } else if (isAdvantage()) {
             gameScore = "Advantage " + getTopPlayer().getPlayerName();
+        } else if (isWin()) {
+            gameScore = getTopPlayer().getPlayerName() + " Wins";
         } else {
             gameScore = getScoreCall(player1.getPlayerScore()) + HYPHEN + getScoreCall(player2.getPlayerScore());
         }
@@ -80,6 +82,10 @@ public class TennisGame {
 
     private boolean isAdvantage() {
         return isAnyPlayerCanWin() && Math.abs(player1.getPlayerScore() - player2.getPlayerScore()) <= 1;
+    }
+
+    private boolean isWin() {
+        return isAnyPlayerCanWin() && Math.abs(player1.getPlayerScore() - player2.getPlayerScore()) >= 1;
     }
 
     private boolean isAnyPlayerCanWin() {
