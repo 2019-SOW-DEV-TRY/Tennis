@@ -2,10 +2,14 @@ package com.personal.kata;
 
 import com.personal.kata.model.Player;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+
 public class TennisGame {
 
-    public static final String HYPHEN = "-";
-    public static final String SAME_GAME_SCORE = "All";
+    private static final String HYPHEN = "-";
+    private static final String SAME_GAME_SCORE = "All";
+    private static final String BLANK = "";
     private Player player1;
     private Player player2;
     private String gameScore;
@@ -42,27 +46,16 @@ public class TennisGame {
         }
     }
 
+    private String getScoreCall(int score) {
+        Optional<Score> scoreCallOfScore = Stream.of(Score.values()).filter(scoreValue -> scoreValue.score == score).findFirst();
+        return scoreCallOfScore.isPresent() ? scoreCallOfScore.get().scoreCall : BLANK;
+    }
+
     private String calculateGameScore() {
-        String player1GameScore = Score.LOVE.scoreCall;
-        String player2GameScore = Score.LOVE.scoreCall;
-        if (isPlayerScoresEqual() && player1.getPlayerScore() == 0) {
-            gameScore = Score.LOVE.scoreCall + HYPHEN + SAME_GAME_SCORE;
-        } else if (isPlayerScoresEqual() && player1.getPlayerScore() == 1) {
-            gameScore = Score.FIFTEEN.scoreCall + HYPHEN + SAME_GAME_SCORE;
-        } else if (isPlayerScoresEqual() && player1.getPlayerScore() == 2) {
-            gameScore = Score.THIRTY.scoreCall + HYPHEN + SAME_GAME_SCORE;
-        } else if (player1.getPlayerScore() == 1) {
-            player1GameScore = Score.FIFTEEN.scoreCall;
-            gameScore = player1GameScore + HYPHEN + player2GameScore;
-        } else if (player2.getPlayerScore() == 1) {
-            player2GameScore = Score.FIFTEEN.scoreCall;
-            gameScore = player1GameScore + HYPHEN + player2GameScore;
-        } else if (player1.getPlayerScore() == 2) {
-            player1GameScore = Score.THIRTY.scoreCall;
-            gameScore = player1GameScore + HYPHEN + player2GameScore;
-        } else if (player2.getPlayerScore() == 2) {
-            player2GameScore = Score.THIRTY.scoreCall;
-            gameScore = player1GameScore + HYPHEN + player2GameScore;
+        if (isPlayerScoresEqual()) {
+            gameScore = getScoreCall(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
+        } else {
+            gameScore = getScoreCall(player1.getPlayerScore()) + HYPHEN + getScoreCall(player2.getPlayerScore());
         }
         return gameScore;
     }

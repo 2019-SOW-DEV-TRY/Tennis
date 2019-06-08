@@ -4,11 +4,14 @@ import com.personal.kata.model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TennisGameTest {
 
+    private static final String ALL = "-All";
     private TennisGame tennisGame;
 
     @BeforeEach
@@ -49,67 +52,24 @@ public class TennisGameTest {
         assertPointsScoredByPlayers(2, 0);
     }
 
-    @Test
-    @DisplayName("Given a tennis game When tennis game starts Then the game score is Love-All")
-    public void test_NewGameState_ShouldHaveGameScore_LoveAll() {
+    @ParameterizedTest
+    @CsvSource({"0,Love", "1,Fifteen", "2,Thirty"})
+    @DisplayName("Given a tennis game started When Player 1 and Player 2 scores same points Then the game score is followed by -All")
+    public void test_GameInProgress_Player1AndPlayer2_ScoreSame_ShouldHaveGameScoreAll(int wins, String scoreCall) {
+        scoreWinsByPlayer(tennisGame.getPlayer1(), wins);
+        scoreWinsByPlayer(tennisGame.getPlayer2(), wins);
 
-        assertEquals("Love-All", tennisGame.getGameScore());
+        assertEquals(scoreCall + ALL, tennisGame.getGameScore());
     }
 
-    @Test
-    @DisplayName("Given a tennis game started When Player1 scores a point Then the game score is Fifteen-Love")
-    public void test_GameInProgress_Player1ScoresOnce_ShouldHaveGameScore_FifteenLove() {
+    @ParameterizedTest
+    @CsvSource({"1,0,Fifteen-Love", "2,0,Thirty-Love", "0,1,Love-Fifteen", "0,2,Love-Thirty", "1,2,Fifteen-Thirty", "2,1,Thirty-Fifteen"})
+    @DisplayName("Given a tennis game started When Player 1 and Player 2 score different points Then the game score contains the score of Player 1 followed by score of Player 2")
+    public void test_GameInProgress_Player1AndPlayer2_ScoreSame_ShouldHaveGameScoreAll(int player1Score, int player2Score, String scoreCall) {
+        scoreWinsByPlayer(tennisGame.getPlayer1(), player1Score);
+        scoreWinsByPlayer(tennisGame.getPlayer2(), player2Score);
 
-        scoreWinsByPlayer(tennisGame.getPlayer1(), 1);
-
-        assertEquals("Fifteen-Love", tennisGame.getGameScore());
-    }
-
-    @Test
-    @DisplayName("Given a tennis game started When Player 1 scores a point and Player 2 scores a point Then the game score is Fifteen-All")
-    public void test_GameInProgress_Player1ScoresOnce_Player2ScoresOnce_ShouldHaveGameScore_FifteenAll() {
-
-        scoreWinsByPlayer(tennisGame.getPlayer1(), 1);
-        scoreWinsByPlayer(tennisGame.getPlayer2(), 1);
-
-        assertEquals("Fifteen-All", tennisGame.getGameScore());
-    }
-
-    @Test
-    @DisplayName("Given a tennis game started When Player 1 scores no point and Player 2 scores a point Then the game score is Love-Fifteen")
-    public void test_GameInProgress_Player2ScoresOnce_ShouldHaveGameScore_LoveFifteen() {
-
-        scoreWinsByPlayer(tennisGame.getPlayer2(), 1);
-
-        assertEquals("Love-Fifteen", tennisGame.getGameScore());
-    }
-
-    @Test
-    @DisplayName("Given a tennis game started When Player 1 scores 2 points and Player 2 scores no point Then the game score is Thirty-Love")
-    public void test_GameInProgress_Player1ScoresTwice_ShouldHaveGameScore_ThirtyLove() {
-
-        scoreWinsByPlayer(tennisGame.getPlayer1(), 2);
-
-        assertEquals("Thirty-Love", tennisGame.getGameScore());
-    }
-
-    @Test
-    @DisplayName("Given a tennis game started When Player 1 scores no point and Player 2 scores 2 points Then the game score is Love-Thirty")
-    public void test_GameInProgress_Player2ScoresTwice_ShouldHaveGameScore_LoveThirty() {
-
-        scoreWinsByPlayer(tennisGame.getPlayer2(), 2);
-
-        assertEquals("Love-Thirty", tennisGame.getGameScore());
-    }
-
-    @Test
-    @DisplayName("Given a tennis game started When Player 1 scores 2 points and Player 2 scores 2 points Then the game score is Thirty-All")
-    public void test_GameInProgress_Player1ScoresTwice_Player2ScoresTwice_ShouldHaveGameScore_ThirtyAll() {
-
-        scoreWinsByPlayer(tennisGame.getPlayer1(), 2);
-        scoreWinsByPlayer(tennisGame.getPlayer2(), 2);
-
-        assertEquals("Thirty-All", tennisGame.getGameScore());
+        assertEquals(scoreCall, tennisGame.getGameScore());
     }
 
     private void scoreWinsByPlayer(Player player, int totalWins) {
