@@ -32,13 +32,17 @@ public class TennisGame {
 
     private String calculateGameScore() {
         String player1GameScore = LOVE;
+        String player2GameScore = LOVE;
         if (isPlayerScoresEqual() && player1.getPlayerScore() == 0) {
             gameScore = LOVE + HYPHEN + SAME_GAME_SCORE;
         } else if (isPlayerScoresEqual() && player1.getPlayerScore() == 1) {
             gameScore = FIFTEEN + HYPHEN + SAME_GAME_SCORE;
         } else if (player1.getPlayerScore() == 1) {
             player1GameScore = FIFTEEN;
-            gameScore = player1GameScore + HYPHEN + LOVE;
+            gameScore = player1GameScore + HYPHEN + player2GameScore;
+        } else if (player2.getPlayerScore() == 1) {
+            player2GameScore = FIFTEEN;
+            gameScore = player1GameScore + HYPHEN + player2GameScore;
         }
         return gameScore;
     }

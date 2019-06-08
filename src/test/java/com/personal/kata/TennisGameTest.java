@@ -75,6 +75,15 @@ public class TennisGameTest {
         assertEquals("Fifteen-All", tennisGame.getGameScore());
     }
 
+    @Test
+    @DisplayName("Given a tennis game started When Player 1 scores no point and Player 2 scores a point Then the game score is Love-Fifteen")
+    public void test_GameInProgress_Player2ScoresOnce_ShouldHaveGameScore_LoveFifteen() {
+
+        scoreWinsByPlayer(tennisGame.getPlayer2(), 1);
+
+        assertEquals("Love-Fifteen", tennisGame.getGameScore());
+    }
+
     private void scoreWinsByPlayer(Player player, int totalWins) {
         for (int ball = 1; ball <= totalWins; ball++) {
             player.scorePoint();
