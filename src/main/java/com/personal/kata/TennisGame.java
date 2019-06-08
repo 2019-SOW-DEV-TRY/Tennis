@@ -77,7 +77,6 @@ public class TennisGame {
                         tennisAppGame.getPlayer2().scorePoint();
                         break;
                     default:
-                        out.println(GAME_OVER_MESSAGE);
                         break game;
                 }
                 out.println(tennisAppGame.getGameScore());
