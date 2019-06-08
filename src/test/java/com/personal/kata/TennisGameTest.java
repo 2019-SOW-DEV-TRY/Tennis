@@ -182,6 +182,16 @@ public class TennisGameTest {
         assertConsoleLines("Game Starts Now!!", 3);
     }
 
+    @Test
+    @DisplayName("Given tennis application is launched When the Game Starts message is displayed Then the Playing instructions is displayed")
+    public void test_TennisApplicationLaunched_AfterPlayingInstructions_ShouldDisplayPlayingInstructions() {
+        inputLinesToConsole();
+
+        tennisGame.launchTennisGame(printStream);
+
+        assertConsoleLines("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", 4);
+    }
+
 
     private void scoreWinsByPlayer(Player player, int totalWins) {
         for (int ball = 1; ball <= totalWins; ball++) {
