@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -124,6 +125,7 @@ public class TennisGameTest {
     @Test
     @DisplayName("Given tennis application is available When the tennis application is launched Then a welcome message is displayed")
     public void test_TennisApplicationIsLaunched_ShouldDisplayWelcomeMessage() {
+        inputLinesToConsole();
 
         tennisGame.launchTennisGame(printStream);
 
@@ -133,10 +135,21 @@ public class TennisGameTest {
     @Test
     @DisplayName("Given tennis application is available When the tennis application is launched Then after the welcome message it prompts to enter first player name ")
     public void test_TennisApplicationIsLaunched_AfterWelcomeMessage_ShouldPromptForFirstPlayerName() {
+        inputLinesToConsole();
 
         tennisGame.launchTennisGame(printStream);
 
         assertConsoleLines("Please enter Player One name: ", 1);
+    }
+
+    @Test
+    @DisplayName("Given tennis application is launched When the prompt to enter Player one name is displayed and entered Then the entered player name is set as Player 1 name")
+    public void test_TennisApplicationLaunched_AfterPlayer1NamePrompt_ShouldAssignEntryToFirstPlayerName() {
+        inputLinesToConsole();
+
+        tennisGame = tennisGame.launchTennisGame(printStream);
+
+        assertEquals("Rob", tennisGame.getPlayer1().getPlayerName());
     }
 
     private void scoreWinsByPlayer(Player player, int totalWins) {
@@ -154,6 +167,11 @@ public class TennisGameTest {
         String console = new String(outputStream.toByteArray());
         String[] consoleLines = console.split(System.getProperty("line.separator"));
         assertEquals(content, consoleLines[lineNumber]);
+    }
+
+    private void inputLinesToConsole() {
+        String consoleInput = "Rob" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(consoleInput.getBytes()));
     }
 
 }

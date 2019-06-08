@@ -3,7 +3,7 @@ package com.personal.kata;
 import com.personal.kata.model.Player;
 
 import java.io.PrintStream;
-import java.util.Optional;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class TennisGame {
@@ -25,6 +25,12 @@ public class TennisGame {
         gameScore = Score.LOVE.scoreCall + HYPHEN + SAME_GAME_SCORE;
     }
 
+    private TennisGame(String player1Name, String player2Name) {
+        player1 = new Player(player1Name);
+        player2 = new Player("Player 2");
+        gameScore = Score.LOVE.scoreCall + HYPHEN + SAME_GAME_SCORE;
+    }
+
     public Player getPlayer1() {
         return player1;
     }
@@ -37,9 +43,12 @@ public class TennisGame {
         return calculateGameScore();
     }
 
-    public void launchTennisGame(PrintStream out) {
+    public TennisGame launchTennisGame(PrintStream out) {
         out.println(WELCOME_MESSAGE);
         out.println(PROMPT_FOR_PLAYER1_NAME);
+        Scanner inputFromConsole = new Scanner(System.in);
+        String player1Name = inputFromConsole.nextLine();
+        return new TennisGame(player1Name, new String());
     }
 
     private enum Score {
@@ -58,8 +67,7 @@ public class TennisGame {
     }
 
     private String getScoreCall(int score) {
-        Optional<Score> scoreCallOfScore = Stream.of(Score.values()).filter(scoreValue -> scoreValue.score == score).findFirst();
-        return scoreCallOfScore.isPresent() ? scoreCallOfScore.get().scoreCall : BLANK;
+        return Stream.of(Score.values()).filter(scoreValue -> scoreValue.score == score).findFirst().map(score1 -> score1.scoreCall).orElse(BLANK);
     }
 
     private String calculateGameScore() {
