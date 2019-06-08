@@ -25,6 +25,7 @@ public class TennisGame {
     private static final String PLAYING_INSTRUCTIONS_PART3 = " Or Press [" + GAME_CANCEL_INDICATOR + "] to stop playing";
     public static final String INVALID_INPUT_MESSAGE = "Please enter a valid Input !!";
     public static final String GAME_OVER_MESSAGE = "Game Over !!";
+    public static final String OR_REGEX = "|";
 
     private Player player1;
     private Player player2;
@@ -67,7 +68,7 @@ public class TennisGame {
         do {
             out.println(PLAYING_INSTRUCTIONS_PART1 + player1Name + PLAYING_INSTRUCTIONS_PART2 + player2Name + PLAYING_INSTRUCTIONS_PART3);
             String input = inputFromConsole.nextLine();
-            if (input.matches("^(([" + PLAYER_1_INDICATOR + "|" + PLAYER_2_INDICATOR + "])|([" + GAME_CANCEL_INDICATOR.toLowerCase() + "|" + GAME_CANCEL_INDICATOR.toUpperCase() + "]))$")) {
+            if (input.matches("^(([" + PLAYER_1_INDICATOR + OR_REGEX + PLAYER_2_INDICATOR + "])" + OR_REGEX + "([" + GAME_CANCEL_INDICATOR.toLowerCase() + OR_REGEX + GAME_CANCEL_INDICATOR.toUpperCase() + "]))$")) {
                 switch (input) {
                     case PLAYER_1_INDICATOR:
                         tennisAppGame.getPlayer1().scorePoint();
