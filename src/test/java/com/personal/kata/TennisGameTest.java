@@ -1,11 +1,13 @@
 package com.personal.kata;
 
 import com.personal.kata.model.Player;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -17,9 +19,13 @@ public class TennisGameTest {
 
     private static final String ALL = "-All";
     private static final String DEUCE_GAME_SCORE = "Deuce";
+    private static final String PLAYER1_INDICATOR = "1";
+    private static final String PLAYER2_INDICATOR = "2";
+    private static final String GAME_CANCEL_INDICATOR = "C";
     private TennisGame tennisGame;
     ByteArrayOutputStream outputStream;
     PrintStream printStream;
+    private static final String NEW_LINE = System.getProperty("line.separator");
 
     @BeforeEach
     public void newGameSetup() {
@@ -195,8 +201,7 @@ public class TennisGameTest {
     @Test
     @DisplayName("Given tennis application is launched When the Playing instructions are displayed and Next key is pressed Then the entered key is validated to be one of acceptable keys")
     public void test_TennisApplicationLaunched_AfterPlayingInstructions_ShouldValidateUserInput_AndDisplayInvalidInputIfInputInvalid() {
-        String newLine = System.getProperty("line.separator");
-        String consoleInput = "Rob" + newLine + "Bob" + newLine + "A";
+        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + "A" + NEW_LINE + GAME_CANCEL_INDICATOR;
         inputThisLineToConsole(consoleInput);
 
         tennisGame.launchTennisGame(printStream);
@@ -207,13 +212,26 @@ public class TennisGameTest {
     @Test
     @DisplayName("Given tennis application is launched When the Playing instructions are displayed and C is pressed Then the game terminates with Game over message")
     public void test_TennisApplicationLaunched_AfterPlayingInstructions_KeyToCancelIsPressed_ShouldTerminateGame() {
-        String newLine = System.getProperty("line.separator");
-        String consoleInput = "Rob" + newLine + "Bob" + newLine + "C";
+        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + GAME_CANCEL_INDICATOR;
         inputThisLineToConsole(consoleInput);
 
         tennisGame.launchTennisGame(printStream);
 
         assertConsoleLines("Game Over !!", 5);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    @DisplayName("Given tennis application is launched When the Playing instructions are displayed and either player keys is pressed Then the player score increases")
+    public void test_TennisApplicationLaunched_AfterPlayingInstructions_PlayerKeysIsEntered_ShouldIncreasePlayerScore(int wins) {
+
+        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + generateStrings(PLAYER1_INDICATOR, wins) + NEW_LINE + generateStrings(PLAYER2_INDICATOR, wins) + NEW_LINE + GAME_CANCEL_INDICATOR;
+        inputThisLineToConsole(consoleInput);
+
+        tennisGame = tennisGame.launchTennisGame(printStream);
+
+        assertEquals(wins, tennisGame.getPlayer1().getPlayerScore());
+        assertEquals(wins, tennisGame.getPlayer2().getPlayerScore());
     }
 
 
@@ -235,13 +253,16 @@ public class TennisGameTest {
     }
 
     private void inputLinesToConsole() {
-        String newLine = System.getProperty("line.separator");
-        String consoleInput = "Rob" + newLine + "Bob" + newLine + "C";
+        String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + GAME_CANCEL_INDICATOR;
         inputThisLineToConsole(consoleInput);
     }
 
     private void inputThisLineToConsole(String consoleInput) {
         System.setIn(new ByteArrayInputStream(consoleInput.getBytes()));
+    }
+
+    private String generateStrings(String key, int times) {
+        return StringUtils.repeat(key, NEW_LINE, times);
     }
 
 }

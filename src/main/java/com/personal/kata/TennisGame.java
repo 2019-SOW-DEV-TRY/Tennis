@@ -63,11 +63,26 @@ public class TennisGame {
         String player2Name = inputFromConsole.nextLine();
         out.println(GAME_STARTS_NOW_MESSAGE);
         TennisGame tennisAppGame = new TennisGame(player1Name, player2Name);
-        out.println(PLAYING_INSTRUCTIONS_PART1 + player1Name + PLAYING_INSTRUCTIONS_PART2 + player2Name + PLAYING_INSTRUCTIONS_PART3);
-        if (inputFromConsole.nextLine().matches("^(([1|2])|([c|C]))$")) {
-            out.println(GAME_OVER_MESSAGE);
-        }
-        out.println(INVALID_INPUT_MESSAGE);
+        label:
+        do {
+            out.println(PLAYING_INSTRUCTIONS_PART1 + player1Name + PLAYING_INSTRUCTIONS_PART2 + player2Name + PLAYING_INSTRUCTIONS_PART3);
+            String input = inputFromConsole.nextLine();
+            if (input.matches("^(([" + PLAYER_1_INDICATOR + "|" + PLAYER_2_INDICATOR + "])|([" + GAME_CANCEL_INDICATOR.toLowerCase() + "|" + GAME_CANCEL_INDICATOR.toUpperCase() + "]))$")) {
+                switch (input) {
+                    case PLAYER_1_INDICATOR:
+                        tennisAppGame.getPlayer1().scorePoint();
+                        break;
+                    case PLAYER_2_INDICATOR:
+                        tennisAppGame.getPlayer2().scorePoint();
+                        break;
+                    default:
+                        out.println(GAME_OVER_MESSAGE);
+                        break label;
+                }
+            } else {
+                out.println(INVALID_INPUT_MESSAGE);
+            }
+        } while (!tennisAppGame.getGameScore().contains("Wins"));
         return tennisAppGame;
     }
 
