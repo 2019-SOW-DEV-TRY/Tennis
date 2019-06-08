@@ -64,20 +64,17 @@ public class TennisGame {
         String player2Name = inputFromConsole.nextLine();
         out.println(GAME_STARTS_NOW_MESSAGE);
         TennisGame tennisAppGame = new TennisGame(player1Name, player2Name);
-        game:
+
         do {
             out.println(PLAYING_INSTRUCTIONS_PART1 + player1Name + PLAYING_INSTRUCTIONS_PART2 + player2Name + PLAYING_INSTRUCTIONS_PART3);
             String input = inputFromConsole.nextLine();
             if (input.matches("^(([" + PLAYER_1_INDICATOR + OR_REGEX + PLAYER_2_INDICATOR + "])" + OR_REGEX + "([" + GAME_CANCEL_INDICATOR.toLowerCase() + OR_REGEX + GAME_CANCEL_INDICATOR.toUpperCase() + "]))$")) {
-                switch (input) {
-                    case PLAYER_1_INDICATOR:
-                        tennisAppGame.getPlayer1().scorePoint();
-                        break;
-                    case PLAYER_2_INDICATOR:
-                        tennisAppGame.getPlayer2().scorePoint();
-                        break;
-                    default:
-                        break game;
+                if (input.equals(PLAYER_1_INDICATOR)) {
+                    tennisAppGame.getPlayer1().scorePoint();
+                } else if (input.equals(PLAYER_2_INDICATOR)) {
+                    tennisAppGame.getPlayer2().scorePoint();
+                } else {
+                    break;
                 }
                 out.println(tennisAppGame.getGameScore());
             } else {
@@ -88,23 +85,12 @@ public class TennisGame {
         return tennisAppGame;
     }
 
-    private enum Score {
-        LOVE(0, "Love"),
-        FIFTEEN(1, "Fifteen"),
-        THIRTY(2, "Thirty"),
-        FORTY(3, "Forty");
-
-        private final int score;
-        private final String scoreCall;
-
-        Score(int score, String scoreCall) {
-            this.score = score;
-            this.scoreCall = scoreCall;
-        }
+    private String getScoreCall(int score) {
+        return Stream.of(Score.values()).filter(scoreValue -> scoreValue.scoreVal == score).findFirst().map(score1 -> score1.scoreCall).orElse(BLANK);
     }
 
-    private String getScoreCall(int score) {
-        return Stream.of(Score.values()).filter(scoreValue -> scoreValue.score == score).findFirst().map(score1 -> score1.scoreCall).orElse(BLANK);
+    private boolean isDeuce() {
+        return isPlayerScoresEqual() && player1.getPlayerScore() >= Score.FORTY.scoreVal;
     }
 
     private String calculateGameScore() {
@@ -126,8 +112,8 @@ public class TennisGame {
         return player1.getPlayerScore() == player2.getPlayerScore();
     }
 
-    private boolean isDeuce() {
-        return isPlayerScoresEqual() && player1.getPlayerScore() >= Score.FORTY.score;
+    private boolean isAnyPlayerCanWin() {
+        return player1.getPlayerScore() > Score.FORTY.scoreVal || player2.getPlayerScore() > Score.FORTY.scoreVal;
     }
 
     private Player getTopPlayer() {
@@ -142,7 +128,18 @@ public class TennisGame {
         return isAnyPlayerCanWin() && Math.abs(player1.getPlayerScore() - player2.getPlayerScore()) > MINIMUM_POINT_DIFFERENCE;
     }
 
-    private boolean isAnyPlayerCanWin() {
-        return player1.getPlayerScore() > Score.FORTY.score || player2.getPlayerScore() > Score.FORTY.score;
+    private enum Score {
+        LOVE(0, "Love"),
+        FIFTEEN(1, "Fifteen"),
+        THIRTY(2, "Thirty"),
+        FORTY(3, "Forty");
+
+        private final int scoreVal;
+        private final String scoreCall;
+
+        Score(int scoreVal, String scoreCall) {
+            this.scoreVal = scoreVal;
+            this.scoreCall = scoreCall;
+        }
     }
 }

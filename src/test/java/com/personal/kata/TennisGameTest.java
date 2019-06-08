@@ -98,7 +98,7 @@ public class TennisGameTest {
     }
 
     @Test
-    @DisplayName("Given a tennis game started When Player 1 and Player 2 score atleast 3 points and each score same points Then the game score is Deuce")
+    @DisplayName("Given a tennis game started When Player 1 and Player 2 score at least 3 points and each score same points Then the game score is Deuce")
     public void test_GameInProgress_Player1AndPlayer2_ScoreAtLeast3Points_AndScoreSamePoints_ShouldHaveGameScoreDeuce() {
         scoreWinsByPlayer(tennisGame.getPlayer1(), 5);
         scoreWinsByPlayer(tennisGame.getPlayer2(), 5);
@@ -108,7 +108,7 @@ public class TennisGameTest {
 
     @ParameterizedTest
     @CsvSource({"6,5,Player 1", "5,6,Player 2"})
-    @DisplayName("Given a tennis game started When Player 1 and Player 2 score atleast 3 points and any Player is ahead by 1 point Then the game score is Advantage Player")
+    @DisplayName("Given a tennis game started When Player 1 and Player 2 score at least 3 points and any Player is ahead by 1 point Then the game score is Advantage Player")
     public void test_GameInProgress_Player1AndPlayer2_ScoreAtLeast3Points_AndPlayerAheadBy1point_ShouldHaveGameScoreAdvantagePlayer(int player1Score, int player2Score, String playerName) {
 
         scoreWinsByPlayer(tennisGame.getPlayer1(), player1Score);
@@ -119,8 +119,8 @@ public class TennisGameTest {
 
     @ParameterizedTest
     @CsvSource({"4,2,Player 1", "3,5,Player 2", "4,6,Player 2", "6,4,Player 1", "0,4,Player 2", "1,4,Player 2", "4,1,Player 1", "12,10,Player 1"})
-    @DisplayName("Given a tennis game started When Any Player has scored atleast 4 points and is ahead by two points Then the game score is Player Wins")
-    public void test_GameInProgress_Player1ScoresAtleast4Points_AndPlayer1AheadByTwoPoints_ShouldHaveGameScorePlayer1Wins(int player1Score, int player2Score, String playerName) {
+    @DisplayName("Given a tennis game started When Any Player has scored at least 4 points and is ahead by two points Then the game score is Player Wins")
+    public void test_GameInProgress_Player1ScoresAtLeast4Points_AndPlayer1AheadByTwoPoints_ShouldHaveGameScorePlayer1Wins(int player1Score, int player2Score, String playerName) {
 
         scoreWinsByPlayer(tennisGame.getPlayer1(), player1Score);
         scoreWinsByPlayer(tennisGame.getPlayer2(), player2Score);

@@ -1,4 +1,4 @@
-###TENNIS
+### TENNIS
 
 About this Kata
 
@@ -14,7 +14,7 @@ The scoring system is rather simple:
 
 Reference: http://codingdojo.org/kata/Tennis/
 
-###Prerequisite for this application
+### Prerequisite for this application
 
 JDK 1.8\
 Maven 3.x
@@ -48,3 +48,5 @@ From console,
 3. Launch the application using `mvn exec:java`
 4. Follow the onscreen instructions and proceed with the game until a player is a winner
 5. You can exit anytime by using 'C' or 'c' when prompted or use Ctrl+C
+
+
