@@ -85,6 +85,7 @@ public class TennisGame {
                 out.println(INVALID_INPUT_MESSAGE);
             }
         } while (!tennisAppGame.getGameScore().contains("Wins"));
+        out.println(GAME_OVER_MESSAGE);
         return tennisAppGame;
     }
 
