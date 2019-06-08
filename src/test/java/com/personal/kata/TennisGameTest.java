@@ -184,12 +184,24 @@ public class TennisGameTest {
 
     @Test
     @DisplayName("Given tennis application is launched When the Game Starts message is displayed Then the Playing instructions is displayed")
-    public void test_TennisApplicationLaunched_AfterPlayingInstructions_ShouldDisplayPlayingInstructions() {
+    public void test_TennisApplicationLaunched_AfterGameStartsMessage_ShouldDisplayPlayingInstructions() {
         inputLinesToConsole();
 
         tennisGame.launchTennisGame(printStream);
 
         assertConsoleLines("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", 4);
+    }
+
+    @Test
+    @DisplayName("Given tennis application is launched When the Playing instructions are displayed and Next key is pressed Then the entered key is validated to be one of acceptable keys")
+    public void test_TennisApplicationLaunched_AfterPlayingInstructions_ShouldValidateUserInput_AndDisplayInvalidInputIfInputInvalid() {
+        String newLine = System.getProperty("line.separator");
+        String consoleInput = "Rob" + newLine + "Bob" + newLine + "A";
+        inputThisLineToConsole(consoleInput);
+
+        tennisGame.launchTennisGame(printStream);
+
+        assertConsoleLines("Please enter a valid Input !!", 5);
     }
 
 
@@ -212,7 +224,11 @@ public class TennisGameTest {
 
     private void inputLinesToConsole() {
         String newLine = System.getProperty("line.separator");
-        String consoleInput = "Rob" + newLine + "Bob";
+        String consoleInput = "Rob" + newLine + "Bob" + newLine + "C";
+        inputThisLineToConsole(consoleInput);
+    }
+
+    private void inputThisLineToConsole(String consoleInput) {
         System.setIn(new ByteArrayInputStream(consoleInput.getBytes()));
     }
 
