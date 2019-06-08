@@ -10,6 +10,7 @@ public class TennisGame {
     private static final String HYPHEN = "-";
     private static final String SAME_GAME_SCORE = "All";
     private static final String BLANK = "";
+    private static final String DEUCE_GAME_SCORE = "Deuce";
     private Player player1;
     private Player player2;
     private String gameScore;
@@ -53,7 +54,9 @@ public class TennisGame {
     }
 
     private String calculateGameScore() {
-        if (isPlayerScoresEqual()) {
+        if (isDeuce()) {
+            gameScore = DEUCE_GAME_SCORE;
+        } else if (isPlayerScoresEqual()) {
             gameScore = getScoreCall(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
         } else {
             gameScore = getScoreCall(player1.getPlayerScore()) + HYPHEN + getScoreCall(player2.getPlayerScore());
@@ -63,5 +66,9 @@ public class TennisGame {
 
     private boolean isPlayerScoresEqual() {
         return player1.getPlayerScore() == player2.getPlayerScore();
+    }
+
+    private boolean isDeuce() {
+        return isPlayerScoresEqual() && player1.getPlayerScore() == 3;
     }
 }
