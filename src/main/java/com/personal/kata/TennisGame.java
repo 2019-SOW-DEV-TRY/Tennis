@@ -15,6 +15,7 @@ public class TennisGame {
     private static final int MINIMUM_POINT_DIFFERENCE = 1;
     private static final String WELCOME_MESSAGE = "Welcome! Lets Play Tennis";
     private static final String PROMPT_FOR_PLAYER1_NAME = "Please enter Player One name: ";
+    public static final String PROMPT_FOR_PLAYER2_NAME = "Please enter Player Two name: ";
     private Player player1;
     private Player player2;
     private String gameScore;
@@ -48,6 +49,7 @@ public class TennisGame {
         out.println(PROMPT_FOR_PLAYER1_NAME);
         Scanner inputFromConsole = new Scanner(System.in);
         String player1Name = inputFromConsole.nextLine();
+        out.println(PROMPT_FOR_PLAYER2_NAME);
         return new TennisGame(player1Name, new String());
     }
 
