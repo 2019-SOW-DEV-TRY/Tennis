@@ -29,4 +29,14 @@ public class TennisGameTest {
         assertEquals("Player 2", tennisGame.getPlayer2().getPlayerName());
     }
 
+    @Test
+    @DisplayName("Given a tennis game started When Player1 scores a point Then the score of Player1 should increase by one point")
+    public void test_GameInProgress_Player1Scores_ShouldIncreaseScoreOfPlayer1() {
+
+        tennisGame.getPlayer1().scorePoint();
+
+        assertEquals(1, tennisGame.getPlayer1().getPlayerScore());
+        assertEquals(0, tennisGame.getPlayer2().getPlayerScore());
+    }
+
 }

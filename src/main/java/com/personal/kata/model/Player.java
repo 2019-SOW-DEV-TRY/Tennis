@@ -15,4 +15,8 @@ public class Player {
     public String getPlayerName() {
         return playerName;
     }
+
+    public void scorePoint() {
+        playerScore = 1;
+    }
 }
