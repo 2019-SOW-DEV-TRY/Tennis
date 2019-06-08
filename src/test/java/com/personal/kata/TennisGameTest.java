@@ -127,9 +127,7 @@ public class TennisGameTest {
 
         tennisGame.launchTennisGame(printStream);
 
-        String console = new String(outputStream.toByteArray());
-        String[] consoleLines = console.split(System.getProperty("line.separator"));
-        assertEquals("Welcome! Lets Play Tennis", consoleLines[0]);
+        assertConsoleLines("Welcome! Lets Play Tennis", 0);
     }
 
     @Test
@@ -138,9 +136,7 @@ public class TennisGameTest {
 
         tennisGame.launchTennisGame(printStream);
 
-        String console = new String(outputStream.toByteArray());
-        String[] consoleLines = console.split(System.getProperty("line.separator"));
-        assertEquals("Please enter Player One name: ", consoleLines[1]);
+        assertConsoleLines("Please enter Player One name: ", 1);
     }
 
     private void scoreWinsByPlayer(Player player, int totalWins) {
@@ -152,6 +148,12 @@ public class TennisGameTest {
     private void assertPointsScoredByPlayers(int player1Score, int player2Score) {
         assertEquals(player1Score, tennisGame.getPlayer1().getPlayerScore());
         assertEquals(player2Score, tennisGame.getPlayer2().getPlayerScore());
+    }
+
+    private void assertConsoleLines(String content, int lineNumber) {
+        String console = new String(outputStream.toByteArray());
+        String[] consoleLines = console.split(System.getProperty("line.separator"));
+        assertEquals(content, consoleLines[lineNumber]);
     }
 
 }

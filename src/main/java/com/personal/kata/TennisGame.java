@@ -13,6 +13,8 @@ public class TennisGame {
     private static final String BLANK = "";
     private static final String DEUCE_GAME_SCORE = "Deuce";
     private static final int MINIMUM_POINT_DIFFERENCE = 1;
+    private static final String WELCOME_MESSAGE = "Welcome! Lets Play Tennis";
+    private static final String PROMPT_FOR_PLAYER1_NAME = "Please enter Player One name: ";
     private Player player1;
     private Player player2;
     private String gameScore;
@@ -36,8 +38,8 @@ public class TennisGame {
     }
 
     public void launchTennisGame(PrintStream out) {
-        out.println("Welcome! Lets Play Tennis");
-        out.println("Please enter Player One name: ");
+        out.println(WELCOME_MESSAGE);
+        out.println(PROMPT_FOR_PLAYER1_NAME);
     }
 
     private enum Score {
