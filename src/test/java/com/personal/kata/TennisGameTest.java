@@ -172,6 +172,16 @@ public class TennisGameTest {
         assertEquals("Bob", tennisGame.getPlayer2().getPlayerName());
     }
 
+    @Test
+    @DisplayName("Given tennis application is launched When the player names are entered Then the Game Starts message is displayed")
+    public void test_TennisApplicationLaunched_AfterPlayer2NameEntered_ShouldDisplayGameStartsMessage() {
+        inputLinesToConsole();
+
+        tennisGame.launchTennisGame(printStream);
+
+        assertConsoleLines("Game Starts Now!!", 3);
+    }
+
 
     private void scoreWinsByPlayer(Player player, int totalWins) {
         for (int ball = 1; ball <= totalWins; ball++) {
