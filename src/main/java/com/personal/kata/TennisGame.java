@@ -58,6 +58,8 @@ public class TennisGame {
             gameScore = DEUCE_GAME_SCORE;
         } else if (isPlayerScoresEqual()) {
             gameScore = getScoreCall(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
+        } else if (isAdvantage()) {
+            gameScore = "Advantage " + getTopPlayer().getPlayerName();
         } else {
             gameScore = getScoreCall(player1.getPlayerScore()) + HYPHEN + getScoreCall(player2.getPlayerScore());
         }
@@ -70,5 +72,17 @@ public class TennisGame {
 
     private boolean isDeuce() {
         return isPlayerScoresEqual() && player1.getPlayerScore() >= Score.FORTY.score;
+    }
+
+    private Player getTopPlayer() {
+        return player1.getPlayerScore() > player2.getPlayerScore() ? player1 : player2;
+    }
+
+    private boolean isAdvantage() {
+        return isAnyPlayerCanWin() && Math.abs(player1.getPlayerScore() - player2.getPlayerScore()) <= 1;
+    }
+
+    private boolean isAnyPlayerCanWin() {
+        return player1.getPlayerScore() > Score.FORTY.score || player2.getPlayerScore() > Score.FORTY.score;
     }
 }
