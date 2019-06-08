@@ -35,7 +35,8 @@ public class TennisGame {
     private enum Score {
         LOVE(0, "Love"),
         FIFTEEN(1, "Fifteen"),
-        THIRTY(2, "Thirty");
+        THIRTY(2, "Thirty"),
+        FORTY(3, "Forty");
 
         private final int score;
         private final String scoreCall;

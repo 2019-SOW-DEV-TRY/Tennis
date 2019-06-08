@@ -63,7 +63,7 @@ public class TennisGameTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"1,0,Fifteen-Love", "2,0,Thirty-Love", "0,1,Love-Fifteen", "0,2,Love-Thirty", "1,2,Fifteen-Thirty", "2,1,Thirty-Fifteen"})
+    @CsvSource({"1,0,Fifteen-Love", "2,0,Thirty-Love", "0,1,Love-Fifteen", "0,2,Love-Thirty", "1,2,Fifteen-Thirty", "2,1,Thirty-Fifteen", "3,0,Forty-Love", "3,1,Forty-Fifteen", "3,2,Forty-Thirty", "1,3,Fifteen-Forty", "2,3,Thirty-Forty"})
     @DisplayName("Given a tennis game started When Player 1 and Player 2 score different points Then the game score contains the score of Player 1 followed by score of Player 2")
     public void test_GameInProgress_Player1AndPlayer2_ScoreSame_ShouldHaveGameScoreAll(int player1Score, int player2Score, String scoreCall) {
         scoreWinsByPlayer(tennisGame.getPlayer1(), player1Score);
@@ -71,6 +71,7 @@ public class TennisGameTest {
 
         assertEquals(scoreCall, tennisGame.getGameScore());
     }
+
 
     private void scoreWinsByPlayer(Player player, int totalWins) {
         for (int ball = 1; ball <= totalWins; ball++) {
