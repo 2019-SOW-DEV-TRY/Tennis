@@ -58,6 +58,9 @@ public class TennisGame {
         } else if (player1.getPlayerScore() == 2) {
             player1GameScore = Score.THIRTY.scoreCall;
             gameScore = player1GameScore + HYPHEN + player2GameScore;
+        } else if (player2.getPlayerScore() == 2) {
+            player2GameScore = Score.THIRTY.scoreCall;
+            gameScore = player1GameScore + HYPHEN + player2GameScore;
         }
         return gameScore;
     }
