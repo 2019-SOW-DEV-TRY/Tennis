@@ -102,6 +102,16 @@ public class TennisGameTest {
         assertEquals("Love-Thirty", tennisGame.getGameScore());
     }
 
+    @Test
+    @DisplayName("Given a tennis game started When Player 1 scores 2 points and Player 2 scores 2 points Then the game score is Thirty-All")
+    public void test_GameInProgress_Player1ScoresTwice_Player2ScoresTwice_ShouldHaveGameScore_ThirtyAll() {
+
+        scoreWinsByPlayer(tennisGame.getPlayer1(), 2);
+        scoreWinsByPlayer(tennisGame.getPlayer2(), 2);
+
+        assertEquals("Thirty-All", tennisGame.getGameScore());
+    }
+
     private void scoreWinsByPlayer(Player player, int totalWins) {
         for (int ball = 1; ball <= totalWins; ball++) {
             player.scorePoint();

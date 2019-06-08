@@ -49,6 +49,8 @@ public class TennisGame {
             gameScore = Score.LOVE.scoreCall + HYPHEN + SAME_GAME_SCORE;
         } else if (isPlayerScoresEqual() && player1.getPlayerScore() == 1) {
             gameScore = Score.FIFTEEN.scoreCall + HYPHEN + SAME_GAME_SCORE;
+        } else if (isPlayerScoresEqual() && player1.getPlayerScore() == 2) {
+            gameScore = Score.THIRTY.scoreCall + HYPHEN + SAME_GAME_SCORE;
         } else if (player1.getPlayerScore() == 1) {
             player1GameScore = Score.FIFTEEN.scoreCall;
             gameScore = player1GameScore + HYPHEN + player2GameScore;
