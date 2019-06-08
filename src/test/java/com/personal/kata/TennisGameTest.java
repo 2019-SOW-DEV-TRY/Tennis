@@ -133,7 +133,7 @@ public class TennisGameTest {
     public void test_TennisApplicationIsLaunched_ShouldDisplayWelcomeMessage() {
         inputLinesToConsole();
 
-        tennisGame.launchTennisGame(printStream);
+        TennisGame.launchTennisGame(printStream);
 
         assertConsoleLines("Welcome! Lets Play Tennis", 0);
     }
@@ -143,7 +143,7 @@ public class TennisGameTest {
     public void test_TennisApplicationIsLaunched_AfterWelcomeMessage_ShouldPromptForFirstPlayerName() {
         inputLinesToConsole();
 
-        tennisGame.launchTennisGame(printStream);
+        TennisGame.launchTennisGame(printStream);
 
         assertConsoleLines("Please enter Player One name: ", 1);
     }
@@ -153,7 +153,7 @@ public class TennisGameTest {
     public void test_TennisApplicationLaunched_AfterPlayer1NamePrompt_ShouldAssignEntryToFirstPlayerName() {
         inputLinesToConsole();
 
-        tennisGame = tennisGame.launchTennisGame(printStream);
+        tennisGame = TennisGame.launchTennisGame(printStream);
 
         assertEquals("Rob", tennisGame.getPlayer1().getPlayerName());
     }
@@ -163,7 +163,7 @@ public class TennisGameTest {
     public void test_TennisApplicationIsLaunched_AfterPlayer1NameEntered_ShouldPromptForSecondPlayerName() {
         inputLinesToConsole();
 
-        tennisGame.launchTennisGame(printStream);
+        TennisGame.launchTennisGame(printStream);
 
         assertConsoleLines("Please enter Player Two name: ", 2);
     }
@@ -173,7 +173,7 @@ public class TennisGameTest {
     public void test_TennisApplicationLaunched_AfterPlayer2NamePrompt_ShouldAssignEntryToSecondPlayerName() {
         inputLinesToConsole();
 
-        tennisGame = tennisGame.launchTennisGame(printStream);
+        tennisGame = TennisGame.launchTennisGame(printStream);
 
         assertEquals("Bob", tennisGame.getPlayer2().getPlayerName());
     }
@@ -183,7 +183,7 @@ public class TennisGameTest {
     public void test_TennisApplicationLaunched_AfterPlayer2NameEntered_ShouldDisplayGameStartsMessage() {
         inputLinesToConsole();
 
-        tennisGame.launchTennisGame(printStream);
+        TennisGame.launchTennisGame(printStream);
 
         assertConsoleLines("Game Starts Now!!", 3);
     }
@@ -193,7 +193,7 @@ public class TennisGameTest {
     public void test_TennisApplicationLaunched_AfterGameStartsMessage_ShouldDisplayPlayingInstructions() {
         inputLinesToConsole();
 
-        tennisGame.launchTennisGame(printStream);
+        TennisGame.launchTennisGame(printStream);
 
         assertConsoleLines("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", 4);
     }
@@ -204,7 +204,7 @@ public class TennisGameTest {
         String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + "A" + NEW_LINE + GAME_CANCEL_INDICATOR;
         inputThisLineToConsole(consoleInput);
 
-        tennisGame.launchTennisGame(printStream);
+        TennisGame.launchTennisGame(printStream);
 
         assertConsoleLines("Please enter a valid Input !!", 5);
     }
@@ -215,7 +215,7 @@ public class TennisGameTest {
         String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + GAME_CANCEL_INDICATOR;
         inputThisLineToConsole(consoleInput);
 
-        tennisGame.launchTennisGame(printStream);
+        TennisGame.launchTennisGame(printStream);
 
         assertConsoleLines("Game Over !!", 5);
     }
@@ -228,7 +228,7 @@ public class TennisGameTest {
         String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + generateStrings(PLAYER1_INDICATOR, wins) + NEW_LINE + generateStrings(PLAYER2_INDICATOR, wins) + NEW_LINE + GAME_CANCEL_INDICATOR;
         inputThisLineToConsole(consoleInput);
 
-        tennisGame = tennisGame.launchTennisGame(printStream);
+        tennisGame = TennisGame.launchTennisGame(printStream);
 
         assertEquals(wins, tennisGame.getPlayer1().getPlayerScore());
         assertEquals(wins, tennisGame.getPlayer2().getPlayerScore());
@@ -241,7 +241,7 @@ public class TennisGameTest {
         String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + generateStrings(PLAYER1_INDICATOR, 2) + NEW_LINE + GAME_CANCEL_INDICATOR;
         inputThisLineToConsole(consoleInput);
 
-        tennisGame = tennisGame.launchTennisGame(printStream);
+        tennisGame = TennisGame.launchTennisGame(printStream);
 
         assertConsoleLines("Please enter who won this Ball, Press [1]: Rob / [2]: Bob Or Press [C] to stop playing", 4);
         assertConsoleLines("Fifteen-Love", 5);
@@ -258,7 +258,7 @@ public class TennisGameTest {
         String consoleInput = "Rob" + NEW_LINE + "Bob" + NEW_LINE + generateStrings(PLAYER1_INDICATOR, 4);
         inputThisLineToConsole(consoleInput);
 
-        tennisGame = tennisGame.launchTennisGame(printStream);
+        tennisGame = TennisGame.launchTennisGame(printStream);
 
         assertConsoleLines("Rob Wins", 11);
         assertConsoleLines("Game Over !!", 12);

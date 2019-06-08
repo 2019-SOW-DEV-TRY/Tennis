@@ -55,7 +55,7 @@ public class TennisGame {
         return calculateGameScore();
     }
 
-    public TennisGame launchTennisGame(PrintStream out) {
+    public static TennisGame launchTennisGame(PrintStream out) {
         out.println(WELCOME_MESSAGE);
         out.println(PROMPT_FOR_PLAYER1_NAME);
         Scanner inputFromConsole = new Scanner(System.in);
