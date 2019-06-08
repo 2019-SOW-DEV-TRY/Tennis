@@ -16,23 +16,6 @@ public class TennisGame {
         gameScore = Score.LOVE.scoreCall + HYPHEN + SAME_GAME_SCORE;
     }
 
-    private String calculateGameScore() {
-        String player1GameScore = Score.LOVE.scoreCall;
-        String player2GameScore = Score.LOVE.scoreCall;
-        if (isPlayerScoresEqual() && player1.getPlayerScore() == 0) {
-            gameScore = Score.LOVE.scoreCall + HYPHEN + SAME_GAME_SCORE;
-        } else if (isPlayerScoresEqual() && player1.getPlayerScore() == 1) {
-            gameScore = Score.FIFTEEN.scoreCall + HYPHEN + SAME_GAME_SCORE;
-        } else if (player1.getPlayerScore() == 1) {
-            player1GameScore = Score.FIFTEEN.scoreCall;
-            gameScore = player1GameScore + HYPHEN + player2GameScore;
-        } else if (player2.getPlayerScore() == 1) {
-            player2GameScore = Score.FIFTEEN.scoreCall;
-            gameScore = player1GameScore + HYPHEN + player2GameScore;
-        }
-        return gameScore;
-    }
-
     public Player getPlayer1() {
         return player1;
     }
@@ -57,6 +40,26 @@ public class TennisGame {
             this.score = score;
             this.scoreCall = scoreCall;
         }
+    }
+
+    private String calculateGameScore() {
+        String player1GameScore = Score.LOVE.scoreCall;
+        String player2GameScore = Score.LOVE.scoreCall;
+        if (isPlayerScoresEqual() && player1.getPlayerScore() == 0) {
+            gameScore = Score.LOVE.scoreCall + HYPHEN + SAME_GAME_SCORE;
+        } else if (isPlayerScoresEqual() && player1.getPlayerScore() == 1) {
+            gameScore = Score.FIFTEEN.scoreCall + HYPHEN + SAME_GAME_SCORE;
+        } else if (player1.getPlayerScore() == 1) {
+            player1GameScore = Score.FIFTEEN.scoreCall;
+            gameScore = player1GameScore + HYPHEN + player2GameScore;
+        } else if (player2.getPlayerScore() == 1) {
+            player2GameScore = Score.FIFTEEN.scoreCall;
+            gameScore = player1GameScore + HYPHEN + player2GameScore;
+        } else if (player1.getPlayerScore() == 2) {
+            player1GameScore = Score.THIRTY.scoreCall;
+            gameScore = player1GameScore + HYPHEN + player2GameScore;
+        }
+        return gameScore;
     }
 
     private boolean isPlayerScoresEqual() {
