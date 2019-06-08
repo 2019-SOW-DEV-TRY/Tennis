@@ -28,12 +28,18 @@ public class TennisGame {
 
     public String getGameScore() {
         String player1GameScore = LOVE;
-        if (player1.getPlayerScore() == player2.getPlayerScore() && player1.getPlayerScore() == 0) {
+        if (isPlayerScoresEqual() && player1.getPlayerScore() == 0) {
             gameScore = LOVE + HYPHEN + SAME_GAME_SCORE;
+        } else if (isPlayerScoresEqual() && player1.getPlayerScore() == 1) {
+            gameScore = FIFTEEN + HYPHEN + SAME_GAME_SCORE;
         } else if (player1.getPlayerScore() == 1) {
             player1GameScore = FIFTEEN;
             gameScore = player1GameScore + HYPHEN + LOVE;
         }
         return gameScore;
+    }
+
+    private boolean isPlayerScoresEqual() {
+        return player1.getPlayerScore() == player2.getPlayerScore();
     }
 }
