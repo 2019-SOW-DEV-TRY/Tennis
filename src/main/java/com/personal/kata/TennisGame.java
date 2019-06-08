@@ -11,6 +11,7 @@ public class TennisGame {
     private static final String SAME_GAME_SCORE = "All";
     private static final String BLANK = "";
     private static final String DEUCE_GAME_SCORE = "Deuce";
+    private static final int MINIMUM_POINT_DIFFERENCE = 1;
     private Player player1;
     private Player player2;
     private String gameScore;
@@ -81,11 +82,11 @@ public class TennisGame {
     }
 
     private boolean isAdvantage() {
-        return isAnyPlayerCanWin() && Math.abs(player1.getPlayerScore() - player2.getPlayerScore()) <= 1;
+        return isAnyPlayerCanWin() && Math.abs(player1.getPlayerScore() - player2.getPlayerScore()) == MINIMUM_POINT_DIFFERENCE;
     }
 
     private boolean isWin() {
-        return isAnyPlayerCanWin() && Math.abs(player1.getPlayerScore() - player2.getPlayerScore()) >= 1;
+        return isAnyPlayerCanWin() && Math.abs(player1.getPlayerScore() - player2.getPlayerScore()) > MINIMUM_POINT_DIFFERENCE;
     }
 
     private boolean isAnyPlayerCanWin() {

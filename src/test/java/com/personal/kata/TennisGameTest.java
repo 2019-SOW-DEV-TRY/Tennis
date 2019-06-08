@@ -114,7 +114,6 @@ public class TennisGameTest {
         assertEquals(playerName + " Wins", tennisGame.getGameScore());
     }
 
-
     private void scoreWinsByPlayer(Player player, int totalWins) {
         for (int ball = 1; ball <= totalWins; ball++) {
             player.scorePoint();
