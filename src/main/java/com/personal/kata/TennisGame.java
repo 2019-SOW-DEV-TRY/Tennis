@@ -64,7 +64,7 @@ public class TennisGame {
         String player2Name = inputFromConsole.nextLine();
         out.println(GAME_STARTS_NOW_MESSAGE);
         TennisGame tennisAppGame = new TennisGame(player1Name, player2Name);
-        label:
+        game:
         do {
             out.println(PLAYING_INSTRUCTIONS_PART1 + player1Name + PLAYING_INSTRUCTIONS_PART2 + player2Name + PLAYING_INSTRUCTIONS_PART3);
             String input = inputFromConsole.nextLine();
@@ -78,7 +78,7 @@ public class TennisGame {
                         break;
                     default:
                         out.println(GAME_OVER_MESSAGE);
-                        break label;
+                        break game;
                 }
                 out.println(tennisAppGame.getGameScore());
             } else {
