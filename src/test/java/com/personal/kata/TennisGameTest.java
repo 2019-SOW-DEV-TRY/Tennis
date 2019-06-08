@@ -13,8 +13,8 @@ public class TennisGameTest {
 
         TennisGame tennisGame = new TennisGame();
 
-        assertEquals(0, tennisGame.getPlayer1Score());
-        assertEquals(0, tennisGame.getPlayer2Score());
+        assertEquals(0, tennisGame.getPlayer1().getPlayerScore());
+        assertEquals(0, tennisGame.getPlayer2().getPlayerScore());
     }
 
     @Test
@@ -23,8 +23,8 @@ public class TennisGameTest {
 
         TennisGame tennisGame = new TennisGame();
 
-        assertEquals("Player 1", tennisGame.getPlayer1Name());
-        assertEquals("Player 2", tennisGame.getPlayer2Name());
+        assertEquals("Player 1", tennisGame.getPlayer1().getPlayerName());
+        assertEquals("Player 2", tennisGame.getPlayer2().getPlayerName());
     }
 
 }

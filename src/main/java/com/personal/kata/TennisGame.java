@@ -1,30 +1,22 @@
 package com.personal.kata;
 
+import com.personal.kata.model.Player;
+
 public class TennisGame {
 
-    private int player1Score;
-    private int player2Score;
-    private String player1Name;
-    private String player2Name;
+    private Player player1;
+    private Player player2;
 
     public TennisGame() {
-        this.player1Name = "Player 1";
-        this.player2Name = "Player 2";
+        player1 = new Player("Player 1");
+        player2 = new Player("Player 2");
     }
 
-    public int getPlayer1Score() {
-        return player1Score;
+    public Player getPlayer1() {
+        return player1;
     }
 
-    public int getPlayer2Score() {
-        return player2Score;
-    }
-
-    public String getPlayer1Name() {
-        return player1Name;
-    }
-
-    public String getPlayer2Name() {
-        return player2Name;
+    public Player getPlayer2() {
+        return player2;
     }
 }
