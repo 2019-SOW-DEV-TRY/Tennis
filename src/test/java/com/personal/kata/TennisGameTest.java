@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TennisGameTest {
@@ -14,10 +17,14 @@ public class TennisGameTest {
     private static final String ALL = "-All";
     private static final String DEUCE_GAME_SCORE = "Deuce";
     private TennisGame tennisGame;
+    ByteArrayOutputStream outputStream;
+    PrintStream printStream;
 
     @BeforeEach
     public void newGameSetup() {
         tennisGame = new TennisGame();
+        outputStream = new ByteArrayOutputStream();
+        printStream = new PrintStream(outputStream);
     }
 
     @Test
@@ -112,6 +119,17 @@ public class TennisGameTest {
         scoreWinsByPlayer(tennisGame.getPlayer2(), player2Score);
 
         assertEquals(playerName + " Wins", tennisGame.getGameScore());
+    }
+
+    @Test
+    @DisplayName("Given tennis application is available When the tennis application is launched Then a welcome message is displayed")
+    public void test_TennisApplicationIsLaunched_ShouldDisplayWelcomeMessage() {
+
+        tennisGame.launchTennisGame(printStream);
+
+        String console = new String(outputStream.toByteArray());
+        String[] consoleLines = console.split(System.getProperty("line.separator"));
+        assertEquals("Welcome! Lets Play Tennis", consoleLines[0]);
     }
 
     private void scoreWinsByPlayer(Player player, int totalWins) {

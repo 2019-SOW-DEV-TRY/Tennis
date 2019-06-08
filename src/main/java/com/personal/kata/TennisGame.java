@@ -2,6 +2,7 @@ package com.personal.kata;
 
 import com.personal.kata.model.Player;
 
+import java.io.PrintStream;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -32,6 +33,10 @@ public class TennisGame {
 
     public String getGameScore() {
         return calculateGameScore();
+    }
+
+    public void launchTennisGame(PrintStream out) {
+        out.println("Welcome! Lets Play Tennis");
     }
 
     private enum Score {
