@@ -17,4 +17,14 @@ public class TennisGameTest {
         assertEquals(0, tennisGame.getPlayer2Score());
     }
 
+    @Test
+    @DisplayName("Given a tennis game When tennis game starts Then there should be two players named Player 1 and Player 2")
+    public void test_NewGameState_ShouldHaveTwoPlayerNames_Player1_Player2() {
+
+        TennisGame tennisGame = new TennisGame();
+
+        assertEquals("Player 1", tennisGame.getPlayer1Name());
+        assertEquals("Player 2", tennisGame.getPlayer2Name());
+    }
+
 }
