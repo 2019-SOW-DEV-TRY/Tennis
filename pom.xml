@@ -95,14 +95,6 @@
                         <version>${pitest-junit5-plugin.version}</version>
                     </dependency>
                 </dependencies>
-                <configuration>
-                    <targetClasses>
-                        <param>com.personal.kata.*</param>
-                    </targetClasses>
-                    <targetTests>
-                        <param>com.personal.kata.*</param>
-                    </targetTests>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>

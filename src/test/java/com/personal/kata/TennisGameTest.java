@@ -107,7 +107,7 @@ public class TennisGameTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"6,5,Player 1", "5,6,Player 2"})
+    @CsvSource({"6,5,Player 1", "5,6,Player 2", "9,10,Player 2", "4,3,Player 1"})
     @DisplayName("Given a tennis game started When Player 1 and Player 2 score at least 3 points and any Player is ahead by 1 point Then the game score is Advantage Player")
     public void test_GameInProgress_Player1AndPlayer2_ScoreAtLeast3Points_AndPlayerAheadBy1point_ShouldHaveGameScoreAdvantagePlayer(int player1Score, int player2Score, String playerName) {
 

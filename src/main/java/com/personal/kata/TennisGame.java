@@ -52,7 +52,8 @@ public class TennisGame {
     }
 
     public String getGameScore() {
-        return calculateGameScore();
+        calculateGameScore();
+        return gameScore;
     }
 
     public static TennisGame launchTennisGame(PrintStream out) {
@@ -93,19 +94,23 @@ public class TennisGame {
         return isPlayerScoresEqual() && player1.getPlayerScore() >= Score.FORTY.scoreVal;
     }
 
-    private String calculateGameScore() {
-        if (isDeuce()) {
-            gameScore = DEUCE_GAME_SCORE;
-        } else if (isPlayerScoresEqual()) {
-            gameScore = getScoreCall(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
-        } else if (isAdvantage()) {
-            gameScore = "Advantage " + getTopPlayer().getPlayerName();
-        } else if (isWin()) {
-            gameScore = getTopPlayer().getPlayerName() + " Wins";
+    private void calculateGameScore() {
+        if (isPlayerScoresEqual()) {
+            if (isDeuce()) {
+                gameScore = DEUCE_GAME_SCORE;
+            } else {
+                gameScore = getScoreCall(player1.getPlayerScore()) + HYPHEN + SAME_GAME_SCORE;
+            }
+        } else if (isAnyPlayerCanWin()) {
+            if (isAdvantage()) {
+                gameScore = "Advantage " + getTopPlayer().getPlayerName();
+            } else {
+                gameScore = getTopPlayer().getPlayerName() + " Wins";
+            }
+
         } else {
             gameScore = getScoreCall(player1.getPlayerScore()) + HYPHEN + getScoreCall(player2.getPlayerScore());
         }
-        return gameScore;
     }
 
     private boolean isPlayerScoresEqual() {
@@ -124,9 +129,6 @@ public class TennisGame {
         return isAnyPlayerCanWin() && Math.abs(player1.getPlayerScore() - player2.getPlayerScore()) == MINIMUM_POINT_DIFFERENCE;
     }
 
-    private boolean isWin() {
-        return isAnyPlayerCanWin() && Math.abs(player1.getPlayerScore() - player2.getPlayerScore()) > MINIMUM_POINT_DIFFERENCE;
-    }
 
     private enum Score {
         LOVE(0, "Love"),
